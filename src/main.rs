@@ -210,7 +210,6 @@ impl App {
             height: size.height,
             present_mode: wgpu::PresentMode::Mailbox,
         };
-        //surface.configure(&device, &surface_config);
         let (vertices, indices) = Vertex::new_cube();
 
         let vertex_buffer = device.create_buffer_init(&BufferInitDescriptor {
@@ -243,7 +242,6 @@ impl App {
                     visibility: ShaderStages::FRAGMENT,
                     ty: wgpu::BindingType::Texture {
                         sample_type: wgpu::TextureSampleType::Float { filterable: true },
-                        //sample_type: wgpu::TextureSampleType::Uint,
                         view_dimension: wgpu::TextureViewDimension::D2,
                         multisampled: false,
                     },
@@ -260,7 +258,6 @@ impl App {
 
         let size = 256;
         let texels = create_texels(size);
-        //let texels = r8_create_texels(size);
         let texture_extent = Extent3d {
             width: size as u32,
             height: size as u32,
@@ -273,7 +270,6 @@ impl App {
             sample_count: 1,
             dimension: TextureDimension::D2,
             format: TextureFormat::Rgba8UnormSrgb,
-            //format: TextureFormat::R8Uint,
             usage: TextureUsages::TEXTURE_BINDING | TextureUsages::COPY_DST,
         });
         let texture_view = texture.create_view(&TextureViewDescriptor::default());
@@ -442,7 +438,6 @@ impl App {
             rpass.draw_indexed(0..self.index_count as u32, 0, 0..1);
         }
 
-        //println!("submit!");
         self.queue.submit(Some(encoder.finish()));
 
         frame.present();
@@ -453,7 +448,6 @@ impl App {
         if self.theta > 2.0 * PI {
             self.theta -= 2.0 * PI;
         }
-        //println!("update {}", self.theta);
     }
 }
 
